@@ -9,8 +9,10 @@ public class StateVoteInfo {
 	private final int houseSeats;
 	private int senateGOPVotes = 0;
 	private int senateDemVotes = 0;
+	private int senateDemWins = 0;
 	private int houseGOPVotes = 0;
 	private int houseDemVotes = 0;
+	private int houseDemWins = 0;
 
 	public StateVoteInfo(String stateLetters, boolean senateRace,
 			int seatsInHouse) {
@@ -36,7 +38,7 @@ public class StateVoteInfo {
 	public String toString() {
 		String s = (String.format("%02d", houseSeats)) + "0";
 		if (senate) {
-			s = s.substring(0,2) + "1";
+			s = s.substring(0, 2) + "1";
 			DecimalFormat f = new DecimalFormat("00000000");
 			s = s + f.format(senateDemVotes) + f.format(senateGOPVotes)
 					+ f.format(houseDemVotes) + f.format(houseGOPVotes);
@@ -74,6 +76,17 @@ public class StateVoteInfo {
 		return true;
 	}
 
+	public boolean setWins(String seat, int wins) {
+		if (seat.contains("Senate")) {
+			senateDemWins = wins;
+		} else if (seat.contains("House")) {
+			houseDemWins = wins;
+		} else {
+			return false;
+		}
+		return true;
+	}
+
 	public String state() {
 		return state.toString();
 	}
@@ -87,11 +100,29 @@ public class StateVoteInfo {
 	}
 
 	public double senateRatio() {
-		return (double) senateDemVotes / (double) senateGOPVotes;
+		return (double) senateDemVotes
+				/ (double) (senateGOPVotes + senateDemVotes);
+	}
+
+	public int senateVotes() {
+		return (senateDemVotes + senateGOPVotes);
+	}
+	
+	public int senateWins() {
+		return senateDemWins;
 	}
 
 	public double houseRatio() {
-		return (double) houseDemVotes / (double) houseGOPVotes;
+		return (double) houseDemVotes
+				/ (double) (houseGOPVotes + houseDemVotes);
 	}
 
+	public int houseVotes() {
+		return (houseDemVotes + houseGOPVotes);
+	}
+
+	public int houseWins(){
+		return houseDemWins;
+	}
+	
 }
