@@ -217,7 +217,7 @@ public class Congress2012MC {
 			tot[1] = tot[1] + yearTot[1];
 			System.out.println("houseTot:" + yearTot[0] + "senTot:"
 					+ yearTot[1] + "nMoreWins:" + moreWins[0] + ","
-					+ moreWins[1] + "total" + n);
+					+ moreWins[1] + "total" + year+"of"+n);
 			System.out.println("Time elapsed (s): "+(float)(System.currentTimeMillis()-time)/1000.);
 		}
 		System.out.println("houseTot:" + yearTot[0] + "senTot:" + yearTot[1]
