@@ -271,6 +271,8 @@ public class Congress2012MC {
 					+ "total" + (year + 1) + "of" + n);
 			yearTot[0] = 0;
 			yearTot[1] = 0;
+			bwo.flush();
+			fwo.flush();
 		}
 		System.out.println("houseTot:" + tot[0] + "senTot:" + tot[1]
 				+ "nMoreWins:" + moreWins[0] + "," + moreWins[1] + "nMinority"
