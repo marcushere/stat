@@ -9,9 +9,11 @@ public class StateVoteInfo {
 	private final int houseSeats;
 	private int senateGOPVotes = 0;
 	private int senateDemVotes = 0;
+	private int senateFstVotes = 0;
 	private int senateDemWins = 0;
 	private int houseGOPVotes = 0;
 	private int houseDemVotes = 0;
+	private int houseFstVotes = 0;
 	private int houseDemWins = 0;
 
 	public StateVoteInfo(String stateLetters, boolean senateRace,
@@ -76,6 +78,17 @@ public class StateVoteInfo {
 		return true;
 	}
 
+	public boolean setFstVotes(String seat, int votes) {
+		if (seat.contains("Senate")) {
+			senateFstVotes = votes;
+		} else if (seat.contains("House")) {
+			houseFstVotes = votes;
+		} else {
+			return false;
+		}
+		return true;
+	}
+
 	public boolean setWins(String seat, int wins) {
 		if (seat.contains("Senate")) {
 			senateDemWins = wins;
@@ -100,29 +113,59 @@ public class StateVoteInfo {
 	}
 
 	public double senateRatio() {
-		return (double) senateDemVotes
-				/ (double) (senateGOPVotes + senateDemVotes);
+		if (senateGOPVotes == senateFstVotes) {
+			return (double) senateDemVotes
+					/ (double) (senateGOPVotes + senateDemVotes);
+		} else if (senateDemVotes == senateFstVotes) {
+			return (double) senateDemVotes
+					/ (double) (senateGOPVotes + senateDemVotes);
+		} else if (senateDemVotes > senateGOPVotes) {
+			return (double) senateDemVotes
+					/ (double) (senateFstVotes + senateDemVotes);
+		} else {
+			return (double) senateDemVotes
+					/ (double) (senateGOPVotes + senateFstVotes);
+		}
 	}
 
 	public int senateVotes() {
 		return (senateDemVotes + senateGOPVotes);
 	}
-	
+
 	public int senateWins() {
 		return senateDemWins;
 	}
 
+	public int senateFstVotes() {
+		return senateFstVotes;
+	}
+
 	public double houseRatio() {
-		return (double) houseDemVotes
-				/ (double) (houseGOPVotes + houseDemVotes);
+		if (houseGOPVotes == houseFstVotes) {
+			return (double) houseDemVotes
+					/ (double) (houseGOPVotes + houseDemVotes);
+		} else if (houseDemVotes == houseFstVotes) {
+			return (double) houseDemVotes
+					/ (double) (houseGOPVotes + houseDemVotes);
+		} else if (houseDemVotes > houseGOPVotes) {
+			return (double) houseDemVotes
+					/ (double) (houseFstVotes + houseDemVotes);
+		} else {
+			return (double) houseDemVotes
+					/ (double) (houseGOPVotes + houseFstVotes);
+		}
 	}
 
 	public int houseVotes() {
 		return (houseDemVotes + houseGOPVotes);
 	}
 
-	public int houseWins(){
+	public int houseWins() {
 		return houseDemWins;
 	}
-	
+
+	public int houseFstVotes() {
+		return houseFstVotes;
+	}
+
 }
