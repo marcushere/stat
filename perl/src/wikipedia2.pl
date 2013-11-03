@@ -5,7 +5,8 @@ use HTML::TreeBuilder;
 use WWW::Mechanize;
 
 # start out on a random page
-my $nexturl = "http://en.wikipedia.org/wiki/Special:Random";
+my $nexturl = "http://en.wikipedia.org/wiki/Provinces_of_Italy"
+#"http://en.wikipedia.org/wiki/Special:Random";
 my $mech = WWW::Mechanize->new();
 $mech->agent_alias('Windows Mozilla');
 $mech->get($nexturl);
@@ -78,7 +79,7 @@ do {
 	# set flag to move on the the next page
 	$nextpage = 1;
 	# print out result
-	print "key $key\n  ->$val\n\n";
+	print "kpey $key\n  ->$val\n\n";
     } else {
 	# set flag to try the next <p>
 	$nextpage = 0;
