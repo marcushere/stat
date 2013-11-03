@@ -101,6 +101,6 @@ do {
 	$nexturl = "http://en.wikipedia.org/wiki/Special:Random";
     }
     
-#quit when we reach the philosophy page
+#quit when we reach the philosophy
 } until ($pageurl eq "http://en.wikipedia.org/wiki/Philosophy");
 #print "Reached philosophy!!";
